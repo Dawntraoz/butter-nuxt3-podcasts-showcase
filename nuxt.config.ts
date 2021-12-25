@@ -5,4 +5,7 @@ export default defineNuxtConfig({
   publicRuntimeConfig: {
     API_TOKEN: process.env.API_TOKEN
   },
+  buildModules: [
+    'nuxt-windicss',
+  ],
 })
