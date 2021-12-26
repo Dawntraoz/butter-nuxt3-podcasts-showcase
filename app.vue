@@ -8,8 +8,24 @@
 
 <script setup>
 const { $butter } = useNuxtApp();
-
 const { data: { data: story } } = await $butter.page.retrieve('*','landing-page-with-components');
+
+useMeta({
+  htmlAttrs: {
+    lang: 'en-US',
+  },
+  title: story.fields.seo.title,
+  meta: [
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1',
+    },
+    {
+      name: 'description',
+      content: story.fields.seo.description,
+    },
+  ],
+})
 </script>
 
 <style>
