@@ -4,7 +4,8 @@
     "dev": "nuxi dev",
     "build": "nuxi build",
     "preview": "nuxi preview",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "podcasts:build": "node scripts/spotify-to-butter.mjs"
   },
   "devDependencies": {
     "nuxt-windicss": "^2.2.1",
