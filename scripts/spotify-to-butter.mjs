@@ -11,9 +11,9 @@ import querystring from 'querystring';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const auth_base_64 = btoa(`${client_id}:${client_secret}`);
+const clientId = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const authBase64 = btoa(`${clientId}:${clientSecret}`);
 
 // your application requests authorization
 const authOptions = {
@@ -21,25 +21,63 @@ const authOptions = {
   url: 'https://accounts.spotify.com/api/token',
   headers: {
     'Content-Type':'application/x-www-form-urlencoded',
-    'Authorization': `Basic ${auth_base_64}`,
+    'Authorization': `Basic ${authBase64}`,
   },
   data: querystring.stringify({grant_type: 'client_credentials'})
 };
 
+const getEpisodes = (options) => (axios(options).then((response) => {
+  const episodes = response.data.items;
+  console.log(`Download ${episodes.length} episodes data from Spotify`);
+
+  return episodes;
+}));
+
+const spotify2Butter = (episodes) => ({
+    "key": "podcast_episode", // Collection name (REQUIRED)
+    "status": "published",
+    "fields": episodes.map(episode => ({ // Array of mapped episodes (REQUIRED)
+      "title": episode.name,
+      "description": episode.description,
+      "url": episode.href,
+      "release_date": episode.release_date,
+      "cover_image": episode.images[0].url,
+    }))
+});
+
+const loadEpisodes = (butterEpisodes) => {
+  const tokenButterCMS = process.env.API_WRITE_TOKEN;
+    
+  axios("https://api.buttercms.com/v2/content/", {
+    method: "POST",
+    headers: {
+      "Authorization": `Token ${tokenButterCMS}`,
+      "Content-Type": "application/json"
+    },
+    data: JSON.stringify(butterEpisodes)
+  })
+    .then(() => {
+      console.log(`Uploaded the ${butterEpisodes.fields.length} episodes to ButterCMS`);
+    })
+    .catch(error => console.log("Request to ButterCMS Failed: ", error));
+};
+
 axios(authOptions)
-  .then(function(response) {
+  .then(async function(response) {
     // use the access token to access the Spotify Web API
     const token = response.data.access_token;
+    const show_id = process.env.SPOTIFY_SHOW_ID;
     const options = {
       method: 'get',
-      url: `https://api.spotify.com/v1/shows/${process.env.SPOTIFY_SHOW_ID}/episodes?market=ES`,
+      url: `https://api.spotify.com/v1/shows/${show_id}/episodes?market=ES`,
       headers: {
         'Authorization': `Bearer ${token}`
       }
     };
-    axios(options).then(function(response) {
-      const episodes = response.data.items;
-      console.log(`${episodes.length} episodes from Spotify`);
-    });
+    
+    const episodes = await getEpisodes(options);
+    const butterEpisodes = spotify2Butter(episodes);
+
+    loadEpisodes(butterEpisodes);
   })
-  .catch(error => console.log(error));
+  .catch(error => console.log("Request to Spotify Failed: ", error));
