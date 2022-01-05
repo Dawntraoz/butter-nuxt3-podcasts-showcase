@@ -1,7 +1,7 @@
 <template>
   <section
     :id="$props.fields.scroll_anchor_id"
-    class="grid md:grid-cols-2 gap-12 items-center px-6 md:px-12 pb-12"
+    class="container mx-auto px-6 pb-12 grid md:grid-cols-2 gap-12 items-center"
   >
     <header
       class="flex flex-col items-center text-center md:items-start md:text-left"
