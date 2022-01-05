@@ -39,7 +39,7 @@ const spotify2Butter = (episodes) => ({
     "fields": episodes.map(episode => ({ // Array of mapped episodes (REQUIRED)
       "title": episode.name,
       "description": episode.description,
-      "url": episode.href,
+      "url": episode.external_urls.spotify,
       "release_date": episode.release_date,
       "cover_image": episode.images[0].url,
     }))
