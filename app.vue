@@ -42,7 +42,8 @@ h6 {
   @apply font-bold pb-6;
 }
 
-h1 { @apply text-3xl md:text-5xl md:leading-tight; }
+h1,
+.h1 { @apply text-3xl md:text-5xl md:leading-tight; }
 h2 { @apply text-xl md:text-2xl; }
 h3 { @apply text-lg md:text-xl; }
 h4,

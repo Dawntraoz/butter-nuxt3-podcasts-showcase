@@ -1,7 +1,7 @@
 <template>
   <a
     :href="$props.url"
-    class="bg-light-blue-900 font-bold text-white py-3 px-6 rounded-full"
+    class="bg-pink-500 font-bold text-white py-3 px-6 rounded-full"
     target="_blank"
     rel="noopener noreferrer"
   >

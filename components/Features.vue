@@ -9,7 +9,7 @@
       tabindex="0"
       class="flex flex-col items-start p-6 bg-gray-50 hover:bg-white focus:bg-white rounded-lg"
     >
-      <figure class="p-1 bg-light-blue-900 rounded-full">
+      <figure class="p-1 bg-indigo-900 rounded-full">
         <atom-image
           :srcUrl="feature.icon"
           :alt="`${feature.headline} icon`"

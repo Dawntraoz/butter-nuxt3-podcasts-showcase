@@ -9,11 +9,11 @@
       class="flex flex-col justify-between items-start p-6 bg-gray-50 hover:bg-white focus:bg-white rounded-lg"
     >
       <p class="text-lg pb-2">
-        <span class="text-3xl text-light-blue-600">❝</span>
+        <span class="text-3xl text-pink-500">❝</span>
         {{ testimonial.quote }}
       </p>
       <p class="text-sm">
-        <span class="text-light-blue-900">{{ testimonial.name }}</span>
+        <span class="text-pink-500">{{ testimonial.name }}</span>
         <br />{{ testimonial.title }}
       </p>
     </div>

@@ -7,7 +7,7 @@
       class="flex flex-col items-center text-center md:items-start md:text-left"
       :class="{ 'md:order-last': $props.fields.image_position === 'left' }"
     >
-      <h1 class="text-light-blue-900">{{ $props.fields.headline }}</h1>
+      <h2 class="h1">{{ $props.fields.headline }}</h2>
       <div v-html="$props.fields.subheadline" class="pb-6 md:pb-8"></div>
       <atom-button
         :url="$props.fields.button_url"

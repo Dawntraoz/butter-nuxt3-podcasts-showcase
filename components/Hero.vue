@@ -1,5 +1,5 @@
 <template>
-  <section :id="$props.fields.scroll_anchor_id" class="bg-light-blue-700 py-12 md:pt-24 mb-24 md:mb-32">
+  <section :id="$props.fields.scroll_anchor_id" class="bg-indigo-800 py-12 md:pt-24 mb-24 md:mb-32">
     <div class="container mx-auto px-6 flex flex-wrap text-white">
       <header
         class="w-full md:w-1/2 lg:w-2/5 flex flex-col items-center text-center md:items-start md:text-left"
